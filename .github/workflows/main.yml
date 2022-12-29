@@ -12,7 +12,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('ci/requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
 
@@ -33,7 +33,7 @@ jobs:
             ${{ runner.os }}-homebin-
 
       - name: Install pre-commit
-        run: python3 -m pip install --disable-pip-version-check -r requirements.txt
+        run: python3 -m pip install --disable-pip-version-check -r ci/requirements.txt
 
       - name: Install terraform-docs
         run: ci/install-binary.sh terraform-docs
