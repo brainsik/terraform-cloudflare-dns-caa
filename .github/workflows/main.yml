@@ -24,8 +24,26 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pre-commit-
 
+      - name: ~/bin cache
+        uses: actions/cache@v3
+        with:
+          path: ~/bin
+          key: ${{ runner.os }}-homebin-2022.12-1
+          restore-keys: |
+            ${{ runner.os }}-homebin-
+
       - name: Install pre-commit
         run: python3 -m pip install pre-commit
 
+      - name: Install terraform-docs
+        env:
+          TERRAFORM_DOCS_VER: v0.16.0
+        run: ci/install-terraform-docs.sh
+
+      - name: Install tflint
+        env:
+          TFLINT_VER: v0.44.0
+        run: ci/install-tflint.sh
+
       - name: Run pre-commit tests
-        run: pre-commit run --all-files
+        run: PATH="~/bin:$PATH" pre-commit run --all-files
