@@ -36,14 +36,10 @@ jobs:
         run: python3 -m pip install --disable-pip-version-check -r requirements.txt
 
       - name: Install terraform-docs
-        run: |
-          source ci/versions.sh
-          ci/install-terraform-docs.sh
+        run: ci/install-binary.sh terraform-docs
 
       - name: Install tflint
-        run: |
-          source ci/versions.sh
-          ci/install-tflint.sh
+        run: ci/install-binary.sh tflint
 
       - name: Run pre-commit tests
         run: PATH="~/bin:$PATH" pre-commit run --all-files
