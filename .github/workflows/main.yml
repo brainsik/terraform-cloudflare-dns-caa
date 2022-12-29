@@ -12,7 +12,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-2022.12-1
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
 
@@ -20,7 +20,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.cache/pre-commit
-          key: ${{ runner.os }}-pre-commit-2022.12-1
+          key: ${{ runner.os }}-pre-commit-${{ hashFiles('.pre-commit-config.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pre-commit-
 
@@ -28,22 +28,22 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/bin
-          key: ${{ runner.os }}-homebin-2022.12-1
+          key: ${{ runner.os }}-homebin-${{ hashFiles('ci/versions.sh') }}
           restore-keys: |
             ${{ runner.os }}-homebin-
 
       - name: Install pre-commit
-        run: python3 -m pip install pre-commit
+        run: python3 -m pip install -r requirements.txt
 
       - name: Install terraform-docs
-        env:
-          TERRAFORM_DOCS_VER: v0.16.0
-        run: ci/install-terraform-docs.sh
+        run: |
+          source ci/versions.sh
+          ci/install-terraform-docs.sh
 
       - name: Install tflint
-        env:
-          TFLINT_VER: v0.44.0
-        run: ci/install-tflint.sh
+        run: |
+          source ci/versions.sh
+          ci/install-tflint.sh
 
       - name: Run pre-commit tests
         run: PATH="~/bin:$PATH" pre-commit run --all-files
