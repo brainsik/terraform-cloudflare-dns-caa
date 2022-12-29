@@ -21,5 +21,7 @@ repos:
     rev: v1.77.0
     hooks:
       - id: terraform_docs
+        args:
+          - --hook-config=--create-file-if-not-exist=true
       - id: terraform_fmt
       - id: terraform_tflint
