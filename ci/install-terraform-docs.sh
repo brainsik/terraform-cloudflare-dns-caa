@@ -14,7 +14,7 @@ mkdir -p "$HOME/bin"
 
 # Grab the zip file from GitHub releases
 pushd "$(mktemp -d -t terraform-docs.XXXXXXXX)" >/dev/null
-curl --fail -L -o terraform-docs.tar.gz "https://github.com/terraform-docs/terraform-docs/releases/download/$TERRAFORM_DOCS_VER/terraform-docs-$TERRAFORM_DOCS_VER-linux-amd64.tar.gz"
+curl --fail -# -L -o terraform-docs.tar.gz "https://github.com/terraform-docs/terraform-docs/releases/download/$TERRAFORM_DOCS_VER/terraform-docs-$TERRAFORM_DOCS_VER-linux-amd64.tar.gz"
 tar -xzf terraform-docs.tar.gz
 chmod +x terraform-docs
 mv terraform-docs "$tfdocs_bin"

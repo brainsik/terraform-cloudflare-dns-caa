@@ -14,7 +14,7 @@ mkdir -p "$HOME/bin"
 
 # Grab the zip file from GitHub releases
 pushd "$(mktemp -d -t tflint.XXXXXXXX)" >/dev/null
-curl --fail -L -o tflint.zip "https://github.com/terraform-linters/tflint/releases/download/${TFLINT_VER}/tflint_linux_amd64.zip"
+curl --fail -# -L -o tflint.zip "https://github.com/terraform-linters/tflint/releases/download/${TFLINT_VER}/tflint_linux_amd64.zip"
 unzip -u tflint.zip
 chmod +x tflint
 mv tflint "$tflint_bin"
