@@ -1,9 +1,19 @@
 # terraform-cloudflare-dns-caa
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 Create Cloudflare [DNS CAA records](https://www.rfc-editor.org/rfc/rfc8659).
 
+The Zone ID can be found on the Cloudflare overview page for the domain you
+want to add records to.
+
+CAA authorizations are additive. Create a separate record for each CA you want
+to authorize. Note this means specifying both an empty issuer domain (`;`) and
+a non-empty domain is the same as specifying just the non-empty domain.
+
 ## Usage
+
+To create a root `example.com` CAA record saying [Let's Encrypt](https://letsencrypt.org)
+can issue hostname certificates and _no_ CA can
+issue wildcards:
 
 ```hcl
 module "example_com_caa" {
@@ -16,10 +26,20 @@ module "example_com_caa" {
 }
 ```
 
-This will create root CAA records for example.com. They say only Let's
-Encrypt should issue certificates for specific hostnames and no CA should
-issue wildcard certificates.
+The same record, but with ACME CAA Account and Method Bindings:
 
+```hcl
+module "example_com_caa" {
+  source = "brainsik/dns-caa/cloudflare"
+
+  zone_id   = "313372600deadcodebea5751993defc0"
+  name      = "example.com"
+  issue     = "letsencrypt.org; accounturi=https://acme-v02.api.letsencrypt.org/acme/acct/123456789; validationmethods=http-01"
+  issuewild = ";"
+}
+```
+
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
 | Name | Version |
