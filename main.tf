@@ -1,5 +1,5 @@
 resource "cloudflare_record" "caa_issue" {
-  count = var.issue != "" ? 1 : 0
+  for_each = var.issue
 
   zone_id = var.zone_id
   name    = var.name
@@ -9,12 +9,12 @@ resource "cloudflare_record" "caa_issue" {
   data {
     flags = 0
     tag   = "issue"
-    value = var.issue
+    value = each.key
   }
 }
 
 resource "cloudflare_record" "caa_issuewild" {
-  count = var.issuewild != "" ? 1 : 0
+  for_each = var.issuewild
 
   zone_id = var.zone_id
   name    = var.name
@@ -24,12 +24,12 @@ resource "cloudflare_record" "caa_issuewild" {
   data {
     flags = 0
     tag   = "issuewild"
-    value = var.issuewild
+    value = each.key
   }
 }
 
 resource "cloudflare_record" "caa_iodef" {
-  count = var.iodef != "" ? 1 : 0
+  for_each = var.iodef
 
   zone_id = var.zone_id
   name    = "theory.org"
@@ -39,6 +39,6 @@ resource "cloudflare_record" "caa_iodef" {
   data {
     flags = 0
     tag   = "iodef"
-    value = var.iodef
+    value = each.key
   }
 }

@@ -69,9 +69,9 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_iodef"></a> [iodef](#input\_iodef) | URL to send violation reports to | `string` | `""` | no |
-| <a name="input_issue"></a> [issue](#input\_issue) | Domain name of CA that can issue certificates for specific hostnames | `string` | `""` | no |
-| <a name="input_issuewild"></a> [issuewild](#input\_issuewild) | Domain name of CA that can issue wildcard certificates | `string` | `""` | no |
+| <a name="input_iodef"></a> [iodef](#input\_iodef) | URL to send violation reports to | `set(string)` | `[]` | no |
+| <a name="input_issue"></a> [issue](#input\_issue) | Domain name of CA that can issue certificates for specific hostnames | `set(string)` | `[]` | no |
+| <a name="input_issuewild"></a> [issuewild](#input\_issuewild) | Domain name of CA that can issue wildcard certificates | `set(string)` | `[]` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name of the record | `string` | n/a | yes |
 | <a name="input_zone_id"></a> [zone\_id](#input\_zone\_id) | The Cloudflare DNS zone ID to add the record to | `string` | n/a | yes |
 

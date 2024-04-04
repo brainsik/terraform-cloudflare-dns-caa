@@ -13,20 +13,20 @@ variable "name" {
 variable "issue" {
   description = "Domain name of CA that can issue certificates for specific hostnames"
 
-  type    = string
-  default = ""
+  type    = set(string)
+  default = []
 }
 
 variable "issuewild" {
   description = "Domain name of CA that can issue wildcard certificates"
 
-  type    = string
-  default = ""
+  type    = set(string)
+  default = []
 }
 
 variable "iodef" {
   description = "URL to send violation reports to"
 
-  type    = string
-  default = ""
+  type    = set(string)
+  default = []
 }
