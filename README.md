@@ -5,10 +5,6 @@ Create Cloudflare [DNS CAA records](https://www.rfc-editor.org/rfc/rfc8659).
 The Zone ID can be found on the Cloudflare overview page for the domain you
 want to add records to.
 
-CAA authorizations are additive. Create a separate record for each CA you want
-to authorize. Note this means specifying both an empty issuer domain (`;`) and
-a non-empty domain is the same as specifying just the non-empty domain.
-
 ## Usage
 
 To create a root `example.com` CAA record saying [Let's Encrypt](https://letsencrypt.org)
@@ -21,8 +17,8 @@ module "example_com_caa" {
 
   zone_id   = "313372600deadcodebea5751993defc0"
   name      = "example.com"
-  issue     = "letsencrypt.org"
-  issuewild = ";"
+  issue     = ["letsencrypt.org"]
+  issuewild = [";"]
 }
 ```
 
@@ -34,8 +30,23 @@ module "example_com_caa" {
 
   zone_id   = "313372600deadcodebea5751993defc0"
   name      = "example.com"
-  issue     = "letsencrypt.org; accounturi=https://acme-v02.api.letsencrypt.org/acme/acct/123456789; validationmethods=http-01"
-  issuewild = ";"
+  issue     = ["letsencrypt.org; accounturi=https://acme-v02.api.letsencrypt.org/acme/acct/123456789; validationmethods=http-01"]
+  issuewild = [";"]
+}
+```
+
+To create a root `example.com` CAA record saying both [Let's Encrypt](https://letsencrypt.org)
+and [ZeroSSL](https://zerossl.com) can issue hostname certificates and _no_ CA can
+issue wildcards:
+
+```hcl
+module "example_com_caa" {
+  source = "brainsik/dns-caa/cloudflare"
+
+  zone_id   = "313372600deadcodebea5751993defc0"
+  name      = "example.com"
+  issue     = ["letsencrypt.org", "sectigo.com"]
+  issuewild = [";"]
 }
 ```
 
