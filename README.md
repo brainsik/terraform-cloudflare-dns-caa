@@ -5,6 +5,17 @@ Create Cloudflare [DNS CAA records](https://www.rfc-editor.org/rfc/rfc8659).
 The Zone ID can be found on the Cloudflare overview page for the domain you
 want to add records to.
 
+## Cloudflare v4
+
+The latest version of this module supports the Cloudflare v5 provider. In
+order to use Cloudflare v4 (which changed the name of the resource used to
+create DNS records), pin to v2 of this module:
+
+```hcl
+  source  = "brainsik/dns-caa/cloudflare"
+  version = "~> 2"
+```
+
 ## Usage
 
 To create a root `example.com` CAA record saying [Let's Encrypt](https://letsencrypt.org)
@@ -56,13 +67,13 @@ module "example_com_caa" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
-| <a name="requirement_cloudflare"></a> [cloudflare](#requirement\_cloudflare) | ~> 4 |
+| <a name="requirement_cloudflare"></a> [cloudflare](#requirement\_cloudflare) | >= 5 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_cloudflare"></a> [cloudflare](#provider\_cloudflare) | ~> 4 |
+| <a name="provider_cloudflare"></a> [cloudflare](#provider\_cloudflare) | >= 5 |
 
 ## Modules
 
@@ -72,9 +83,9 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [cloudflare_record.caa_iodef](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/record) | resource |
-| [cloudflare_record.caa_issue](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/record) | resource |
-| [cloudflare_record.caa_issuewild](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/record) | resource |
+| [cloudflare_dns_record.caa_iodef](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/dns_record) | resource |
+| [cloudflare_dns_record.caa_issue](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/dns_record) | resource |
+| [cloudflare_dns_record.caa_issuewild](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/dns_record) | resource |
 
 ## Inputs
 
