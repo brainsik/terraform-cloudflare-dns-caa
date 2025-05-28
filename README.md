@@ -7,9 +7,10 @@ want to add records to.
 
 ## Cloudflare v4
 
-The latest version of this module supports the Cloudflare v5 provider. In
-order to use Cloudflare v4 (which changed the name of the resource used to
-create DNS records), pin to v2 of this module:
+The main branch version of this module (not yet released) supports the
+Cloudflare v5 provider which changed the name of the resource used to create
+DNS records. To continue using Cloudflare v4 without interruption, pin to v2
+of this module:
 
 ```hcl
   source  = "brainsik/dns-caa/cloudflare"
