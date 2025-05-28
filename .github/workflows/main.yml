@@ -43,4 +43,4 @@ jobs:
         run: ci/install-binary.sh tflint
 
       - name: Run pre-commit tests
-        run: PATH="~/bin:$PATH" pre-commit run --all-files
+        run: PATH="$HOME/bin:$PATH" pre-commit run --all-files
